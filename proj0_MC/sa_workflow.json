@@ -1,0 +1,64 @@
+{
+  "workflow_id": "sa_workflow_001",
+  "status": "in_progress",
+  "stages": {
+    "variables_defined": true,
+    "samples_generated": true,
+    "model_evaluated": true,
+    "surrogate_trained": false,
+    "sa_computed": false
+  },
+  "variables": [
+    {
+      "name": "E",
+      "kind": "uniform",
+      "params": {
+        "high": 220000000000.0,
+        "low": 200000000000.0
+      },
+      "targets": [
+        {
+          "path": "elements[*].E",
+          "doc": "FE"
+        }
+      ]
+    },
+    {
+      "name": "A",
+      "kind": "uniform",
+      "params": {
+        "high": 0.011,
+        "low": 0.009
+      },
+      "targets": [
+        {
+          "doc": "FE",
+          "path": "elements[*].A"
+        }
+      ]
+    },
+    {
+      "name": "F_y",
+      "kind": "uniform",
+      "params": {
+        "low": -1100.0,
+        "high": -900.0
+      },
+      "targets": [
+        {
+          "path": "loads[29]",
+          "doc": "FE"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "created": "2025-11-11T10:42:00.955545",
+    "updated": "2025-11-12T14:12:36.859915",
+    "num_vars": 3,
+    "n_samples": 20,
+    "sampling_method": "random",
+    "n_evaluated": 20,
+    "results_file": "sa_results.json"
+  }
+}

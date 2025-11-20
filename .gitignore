@@ -1,0 +1,55 @@
+# Virtual environments (just in case)
+.venv/
+venv/
+env/
+ENV/
+
+# Conda environments (if created locally)
+.conda/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Type checking
+.mypy_cache/
+.pytype/
+
+# Environment variables
+.env
+.env.local
+.env.encrypted
+
+# UV (in case you switch back)
+.uv/
+uv.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project-specific results
+*.log
+
+# native documents
+docs/

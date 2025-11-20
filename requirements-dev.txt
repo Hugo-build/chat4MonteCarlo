@@ -1,0 +1,19 @@
+# Include main requirements
+-r requirements.txt
+
+# Development tools
+pytest>=7.4
+pytest-cov>=4.1
+ruff>=0.6
+black>=23.0
+mypy>=1.0
+
+# Jupyter (optional)
+jupyter>=1.0
+ipykernel>=6.0
+ipywidgets>=8.0
+
+# Enhanced visualization (optional)
+seaborn>=0.12
+plotly>=5.0
+
