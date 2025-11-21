@@ -1,0 +1,3 @@
+[submodule "pySMC"]
+	path = pySMC
+	url = https://github.com/Hugo-build/pySMC
