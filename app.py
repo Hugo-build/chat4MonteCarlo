@@ -20,16 +20,17 @@ from typing import Any, Dict, List   # for type hints
 
 import streamlit as st               # for the simple chat UI
 from dotenv import load_dotenv       # for loading .env files
+import atexit                        # for cleanup on exit
 
-# Load environment variables from .env file
-load_dotenv()
+
 
 # ----------------------------------------------------------------------------
 # Configuration
 # ----------------------------------------------------------------------------
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
-OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", None)  # For Gemini or other compatible APIs
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+load_dotenv()
+OPENAI_API_KEY    = os.getenv("OPENAI_API_KEY", "")
+OPENAI_BASE_URL   = os.getenv("OPENAI_BASE_URL", None)  # For Gemini or other compatible APIs
+OPENAI_MODEL      = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 MCP_SERVER_SCRIPT = os.getenv("MCP_SERVER_SCRIPT", "server.py")
 
 # Get workspace root
@@ -390,10 +391,19 @@ def main():
             message_placeholder.markdown(final_content)
             st.session_state.messages.append({"role": "assistant", "content": final_content})
     
-    # Cleanup button
-    if st.sidebar.button("🔄 Reset Chat"):
-        st.session_state.messages = []
-        st.rerun()
+    # Action buttons
+    with st.sidebar:
+        st.divider()
+        st.header("⚙️ Actions")
+        
+        col1, _ = st.columns(2)
+        
+        with col1:
+            if st.button("🔄 Reset Chat"):
+                st.session_state.messages = []
+                st.rerun()
+        
+        
 
 
 if __name__ == "__main__":

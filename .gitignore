@@ -33,6 +33,11 @@ htmlcov/
 .env
 .env.local
 .env.encrypted
+.env.salt
+.env.2fa.secret
+.env.setup_method
+
+.env copy
 
 # UV (in case you switch back)
 .uv/
@@ -53,3 +58,4 @@ Thumbs.db
 
 # native documents
 docs/
+backups/
