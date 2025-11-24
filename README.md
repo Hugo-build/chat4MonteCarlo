@@ -1,6 +1,9 @@
 # Chat4MonteCarlo
 
-This repository provides example projects with MCP (Model Context Protocol) servers for LLM integration. The MCP servers enable LLMs to perform Monte Carlo simulation-based tasks in science and engineering topics.
+This repository provides example projects with MCP (Model Context Protocol) servers for LLM integration. 
+The MCP servers enable LLMs to perform Monte-Carlo simulation-based tasks in science and engineering topics.
+
+
 
 ## 📦 Installation
 
@@ -24,6 +27,16 @@ OPENAI_MODEL=gpt-4o-mini
 OPENAI_BASE_URL=https://theAIprovider.com
 ```
 
+#### 🔍 Check API Key (Optional)
+
+To test your API key validity manually:
+
+```bash
+python test_api_key.py
+```
+
+The API key should be in **"OpenAI-compatible"** format.
+
 Simply run the app - it will show a beautiful web-based setup wizard:
 
 ```bash
@@ -32,10 +45,26 @@ streamlit run app.py
 
 After running the UI app from the command line, the UI app will be shown as a web page in the browser.
 
+The UI allows the user to focus on the project of interest. The working project can be re-selected, and the corresponding MCP tools will be loaded for the LLM. The **project selection** is currently set at the top of the sidebar. 
+
+<img src="figs/demo_selectProj.png" alt="Alt Text" width="30%">
+
+After selecting the project, at the sidebar, the available mcp tools within that working dictionary can be found as
+
+<img src="figs/demo_mcpList.png" alt="Alt Text" width="30%">
+
+After navigating into the exact project, the user can start to work with LLM for project work. The main chat interface is on the right-hand side of the sidebar.
+
+<img src="figs/demo_chat.png" alt="Alt Text" width="80%">
+
+In the demo project of `proj0_FE`, the finite element solving can be executed by LLM. The graphical results can be visualized by the AI assistant through functional calls.
+
+<img src="figs/demo_callFEResult.png" alt="Alt Text" width="80%">
+
 
 
 ---
-### 🔐 Security Features
+## 🔐 Security Features
 
 This project includes **.env encryption** with three security levels:
 
@@ -55,19 +84,11 @@ python encrypt_env.py verify-2fa        # Test your 2FA code
 python encrypt_env.py disable-2fa       # Remove 2FA (keep password)
 ```
 
-⚠️ **Important:** If you set up via the web UI, you typically don't need these commands. The web UI handles encryption setup automatically.
 
-## 🔍 Check API Key (Optional)
 
-To test your API key validity manually:
 
-```bash
-python test_api_key.py
-```
 
-The API key should be in **"OpenAI-compatible"** format.
-
-## 📁 Project Structure
+## 📁 Repository's Structure
 
 This repository contains:
 
@@ -76,7 +97,7 @@ This repository contains:
 - **`proj0_FE/`** - Finite Element analysis example project with MCP server
 - **`proj0_MC/`** - Monte Carlo simulation example project with MCP server
 - **`proj0_SU/`** - Surrogate modeling example project with MCP server
-- **`pySMC/`** - Core Python package for Sequential Monte Carlo methods
+- **`pySMC/`** - Core Python package for Sequential Monte Carlo methods (added from another project --> [pySMC](https://github.com/Hugo-build/pySMC) 
 - **`requirements.txt`** - Python package dependencies
 
 Each example project (`proj0_*`) includes its own MCP server (`server.py`) that exposes specialized tools for LLM integration.
