@@ -39,8 +39,8 @@ Import core modules needed for SA operations.
 Returns tuple: (Variable, VariableSet, success, message)
 """
 try:
-    from core.Variables import Variable, VariableSet
-    from core.Samplers import sample_inputs
+    from pySMC import Variable, VariableSet
+    from pySMC import sample_inputs
 except ImportError:
     print("Failed to import core modules")
 
@@ -235,7 +235,7 @@ def create_variable(
         }
 
 
-@mcp.tool(name="MC.list_variables")
+@mcp.tool(name="MC_list_variables")
 def list_variables() -> Dict[str, Any]:
     """
     List all defined variables in the current workflow.
@@ -280,7 +280,7 @@ def list_variables() -> Dict[str, Any]:
         }
 
 
-@mcp.tool(name="MC.delete_variable")
+@mcp.tool(name="MC_delete_variable")
 def delete_variable(name: str) -> Dict[str, Any]:
     """
     Delete a variable from the workflow.
@@ -343,7 +343,7 @@ def delete_variable(name: str) -> Dict[str, Any]:
         }
 
 
-@mcp.tool(name="MC.clear_workflow")
+@mcp.tool(name="MC_clear_workflow")
 def clear_workflow() -> Dict[str, Any]:
     """
     Clear the current workflow (removes all variables and resets workflow state).
@@ -397,7 +397,7 @@ def clear_workflow() -> Dict[str, Any]:
         }
 
 
-@mcp.tool(name="MC.get_workflow_status")
+@mcp.tool(name="MC_get_workflow_status")
 def get_workflow_status() -> Dict[str, Any]:
     """
     Get the current workflow status and progress.
@@ -448,7 +448,7 @@ def get_workflow_status() -> Dict[str, Any]:
 # Tools for Sampling
 # ============================================================================
 
-@mcp.tool(name="MC.generate_samples")
+@mcp.tool(name="MC_generate_samples")
 def generate_samples(
     n_samples: int,
     method: str = "random",
@@ -574,7 +574,7 @@ def generate_samples(
         }
 
 
-@mcp.tool(name="MC.get_samples")
+@mcp.tool(name="MC_get_samples")
 def get_samples(max_rows: int = None) -> Dict[str, Any]:
     """
     Retrieve generated samples from the workflow.
@@ -637,7 +637,7 @@ def get_samples(max_rows: int = None) -> Dict[str, Any]:
         }
 
 
-@mcp.tool(name="MC.get_sample_statistics")
+@mcp.tool(name="MC_get_sample_statistics")
 def get_sample_statistics() -> Dict[str, Any]:
     """
     Get statistical summary of generated samples.
@@ -870,7 +870,7 @@ def _reconstruct_variables(workflow: Dict[str, Any]) -> List:
 # Tools for Model Evaluation
 # ============================================================================
 
-@mcp.tool(name="MC.evaluate")
+@mcp.tool(name="MC_evaluate")
 def evaluate(
     evaluator: str = "FE_static",
     input_config: str = "fe_config.json",
@@ -1089,7 +1089,7 @@ def evaluate(
         }
 
 
-@mcp.tool(name="MC.get_results")
+@mcp.tool(name="MC_get_results")
 def get_results(
     results_file: str = "sa_results.json",
     max_rows: int = None
@@ -1157,54 +1157,13 @@ def get_results(
         }
 
 
-# ============================================================================
-# Tools for Surrogate Modeling
-# ============================================================================
-
-@mcp.tool(name="SA.train_surrogate")
-def train_surrogate(
-    model_type: str = "GaussianProcess",
-    kernel_type: str = "RBF",
-    train_config: Dict[str, Any] = None
-) -> Dict[str, Any]:
-    """
-    Train a surrogate model on evaluation results.
-    
-    Args:
-        model_type: Surrogate type ("GaussianProcess", "PolynomialChaos")
-        kernel_type: Kernel for GP ("RBF", "Matern")
-        train_config: Training configuration dict
-    
-    Returns:
-        Dictionary with:
-        - success: boolean
-        - config_file: path to surrogate config
-        - model_file: path to trained model
-        - performance: performance metrics
-        - message: status message
-    """
-    # TODO: Implement surrogate training
-    # 1. Load results
-    # 2. Split and scale data
-    # 3. Train model
-    # 4. Evaluate performance
-    # 5. Save config and model
-    # 6. Return summary
-    
-    return {
-        "success": False,
-        "config_file": None,
-        "model_file": None,
-        "performance": {},
-        "message": "Not implemented yet"
-    }
 
 
 # ============================================================================
 # Tools for Sensitivity Analysis
 # ============================================================================
 
-@mcp.tool(name="SA.compute_sobol")
+@mcp.tool(name="SA_compute_sobol")
 def compute_sobol(
     n_samples: int = 10000,
     use_surrogate: bool = True,

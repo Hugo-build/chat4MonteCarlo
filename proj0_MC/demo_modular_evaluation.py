@@ -22,8 +22,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 # Import from new modular structure
 from evaluators import solve_FE_static, get_evaluator, list_evaluators
 from evaluate import evaluate_samples, evaluate_from_files
-from core.Variables import Variable
-from core.Samplers import sample_inputs, VariableSet
+from pySMC import Variable
+from pySMC import sample_inputs, VariableSet
 
 
 def demo_direct_usage():

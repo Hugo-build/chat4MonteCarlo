@@ -1,0 +1,12 @@
+{
+  "version": "1.0",
+  "model_type": "gpax",
+  "has_model": true,
+  "has_x_scaler": true,
+  "has_y_scaler": true,
+  "has_data": true,
+  "scaled4X": true,
+  "scaled4y": true,
+  "verbose": false,
+  "fitted": false
+}

@@ -88,7 +88,7 @@ def detect_json(subdirectory: str = ".") -> Dict[str, Any]:
         "message": f"✓ Found {len(json_files)} JSON files in {subdirectory}"
     }
     
-@mcp.tool(name="FE.detect_files")
+@mcp.tool(name="FE_detect_files")
 def detect_fe_files(subdirectory: str = ".") -> Dict[str, Any]:
     """
     Detect FE model files (nodes.csv and elements.csv) in the project directory.
@@ -176,7 +176,7 @@ def detect_fe_files(subdirectory: str = ".") -> Dict[str, Any]:
 # Tool 2: Load and Validate FE Files
 # ============================================================================
 
-@mcp.tool(name="FE.load_model")
+@mcp.tool(name="FE_load_model")
 def load_fe_model(subdirectory: str = ".") -> Dict[str, Any]:
     """
     Load FE model from nodes.csv and elements.csv files in the project.
@@ -336,7 +336,7 @@ def load_fe_model(subdirectory: str = ".") -> Dict[str, Any]:
 # Tool 3: Plot Undisplaced FE Model
 # ============================================================================
 
-@mcp.tool(name="FE.plot_model")
+@mcp.tool(name="FE_plot_model")
 def plot_fe_model(subdirectory: str = ".", fe_config_file: str = "fe_config.json") -> Dict[str, Any]:
     """
     Plot the undisplaced FE model in 3D from a saved config file.
@@ -464,7 +464,7 @@ def plot_fe_model(subdirectory: str = ".", fe_config_file: str = "fe_config.json
 
 # ============================================================================  # Tool 4: Add Fixed DOFs
 
-@mcp.tool(name="FE.add_fixed_dofs")
+@mcp.tool(name="FE_add_fixed_dofs")
 def add_fixed_dofs(
     subdirectory: str = ".",
     config_filename: str = "fe_config.json",
@@ -555,7 +555,7 @@ def add_fixed_dofs(
         }
 
 
-@mcp.tool(name="FE.add_load")
+@mcp.tool(name="FE_add_load")
 def add_load(
     subdirectory: str = ".",
     config_filename: str = "fe_config.json",
@@ -681,9 +681,7 @@ def add_load(
         }
 
 
-
-
-@mcp.tool(name="FE.solve_static")
+@mcp.tool(name="FE_solve_static")
 def solve_fe_static(
     subdirectory: str = ".",
     config_filename: str = "fe_config.json",
@@ -858,7 +856,7 @@ def solve_fe_static(
 # Tool 4: Get Model Info
 # ============================================================================
 
-@mcp.tool(name="FE.get_info")
+@mcp.tool(name="FE_get_info")
 def get_fe_info(subdirectory: str = ".") -> str:
     """
     Get detailed information about an FE model in a human-readable format.
@@ -904,7 +902,7 @@ def get_fe_info(subdirectory: str = ".") -> str:
     return info.strip()
 
 
-@mcp.tool(name="FE.plot_deformed")
+@mcp.tool(name="FE_plot_deformed")
 def plot_deformed(
     subdirectory: str = ".",
     config_filename: str = "fe_config.json",

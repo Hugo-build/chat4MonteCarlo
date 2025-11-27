@@ -139,7 +139,7 @@ def convert_mcp_tools_to_openai(mcp_tools: List[Dict]) -> List[Dict]:
 
 
 def call_openai_chat(messages: List[Dict], tools: List[Dict]) -> Dict:
-    """Call OpenAI Chat Completions API (or compatible API like Gemini)."""
+    """Call OpenAI Chat Completions API (or compatible API like Gemini via OpenRouter)."""
     try:
         from openai import OpenAI
         
@@ -147,15 +147,33 @@ def call_openai_chat(messages: List[Dict], tools: List[Dict]) -> Dict:
         client_kwargs = {"api_key": OPENAI_API_KEY}
         if OPENAI_BASE_URL:
             client_kwargs["base_url"] = OPENAI_BASE_URL
+            # Add OpenRouter-specific headers for reasoning model compatibility
+            client_kwargs["default_headers"] = {
+                "HTTP-Referer": "https://github.com/your-app",  # Optional: for OpenRouter rankings
+                "X-Title": "MCP Chat Demo"  # Optional: for OpenRouter dashboard
+            }
         
         client = OpenAI(**client_kwargs)
         
-        response = client.chat.completions.create(
-            model=OPENAI_MODEL,
-            messages=messages,
-            tools=tools if tools else None,
-            tool_choice="auto" if tools else None
-        )
+        # Build request kwargs
+        request_kwargs = {
+            "model": OPENAI_MODEL,
+            "messages": messages,
+        }
+        
+        # Add tools if available
+        if tools:
+            request_kwargs["tools"] = tools
+            request_kwargs["tool_choice"] = "auto"
+        
+        # For OpenRouter with Gemini reasoning models: include reasoning tokens
+        # This tells OpenRouter to preserve thought signatures in the response
+        if OPENAI_BASE_URL and "openrouter" in OPENAI_BASE_URL.lower():
+            request_kwargs["extra_body"] = {
+                "include": ["reasoning"],  # Preserve reasoning blocks
+            }
+        
+        response = client.chat.completions.create(**request_kwargs)
         
         return response.choices[0].message
     except ImportError:
@@ -285,10 +303,14 @@ def main():
             message_placeholder = st.empty()
             
             # Prepare messages for OpenAI
-            openai_messages = [
-                {"role": m["role"], "content": m["content"]} 
-                for m in st.session_state.messages
-            ]
+            # Preserve any reasoning content for Gemini models
+            openai_messages = []
+            for m in st.session_state.messages:
+                msg = {"role": m["role"], "content": m["content"]}
+                # Preserve reasoning blocks if present (for Gemini via OpenRouter)
+                if "reasoning" in m:
+                    msg["reasoning"] = m["reasoning"]
+                openai_messages.append(msg)
             
             # Call OpenAI
             with st.spinner("Thinking..."):
@@ -311,7 +333,8 @@ def main():
                 with st.expander("🔧 Calling tools...", expanded=True):
                     for tool_call in tool_calls:
                         tool_name = tool_call.function.name
-                        tool_args = json.loads(tool_call.function.arguments)
+                        # Handle case where arguments is None (tool has no required params)
+                        tool_args = json.loads(tool_call.function.arguments) if tool_call.function.arguments else {}
                         
                         st.write(f"**Calling:** `{tool_name}`")
                         st.json(tool_args)
@@ -360,7 +383,7 @@ def main():
                             "type": "function",
                             "function": {
                                 "name": tc.function.name,
-                                "arguments": tc.function.arguments
+                                "arguments": tc.function.arguments or "{}"
                             }
                         }
                         for tc in tool_calls
@@ -389,7 +412,15 @@ def main():
             
             # Display final response
             message_placeholder.markdown(final_content)
-            st.session_state.messages.append({"role": "assistant", "content": final_content})
+            
+            # Build message dict, preserving reasoning if present (for Gemini via OpenRouter)
+            final_msg = {"role": "assistant", "content": final_content}
+            # Check for reasoning in the response (OpenRouter returns this for Gemini thinking models)
+            response_to_check = final_response if response_message.tool_calls else response_message
+            if hasattr(response_to_check, 'reasoning') and response_to_check.reasoning:
+                final_msg["reasoning"] = response_to_check.reasoning
+            
+            st.session_state.messages.append(final_msg)
     
     # Action buttons
     with st.sidebar:

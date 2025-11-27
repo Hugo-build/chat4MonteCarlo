@@ -15,12 +15,14 @@ import sys
 from pathlib import Path
 import json
 import numpy as np
+from pprint import pprint
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
+pprint(sys.path)
 
-from core.Variables import Variable, VariableSet
-from core.Samplers import sample_inputs
+from pySMC import Variable, VariableSet
+from pySMC import sample_inputs
 
 def main():
     print("="*70)
@@ -31,7 +33,7 @@ def main():
     fe_config_path = Path("fe_config.json")
     if not fe_config_path.exists():
         print("\n❌ ERROR: fe_config.json not found!")
-        print("Please run this from proj0_SA directory with a valid FE config.")
+        print("Please run this from proj0 directory with a valid FE config.")
         print("You may need to copy fe_config.json from proj0_FE or examples.")
         return
     
@@ -163,7 +165,7 @@ def main():
     
     # Import FE solver
     from FElib import elMatrixBar6DoF, rotateMat
-    from core.Variables import inject_single_config
+    from pySMC import inject_single_config
     
     # Evaluation function
     def evaluate_fe(config):

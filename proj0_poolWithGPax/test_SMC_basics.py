@@ -1,3 +1,11 @@
+import sys
+from pathlib import Path
+import json
+from pprint import pprint
+# Add parent directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+pprint(sys.path)
+
 from pySMC import (
     SurrogatePipe, StandardScaler,
     GaussianProcess, RBF, optSetup,
@@ -8,7 +16,8 @@ from pySMC import (
 import jax.numpy as jnp
 import numpy as np
 import matplotlib.pyplot as plt
-from pprint import pprint
+
+
 
 
 def print_metrics(y_true, y_pred, y_std=None):
