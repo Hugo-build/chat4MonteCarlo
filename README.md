@@ -37,7 +37,7 @@ python test_api_key.py
 
 The API key should be in **"OpenAI-compatible"** format.
 
-Simply run the app - it will show a beautiful web-based setup wizard:
+Simply run the app - it will show a user-friendly web-app interface:
 
 ```bash
 streamlit run app.py
@@ -63,7 +63,8 @@ In the demo project of `proj0_FE`, the finite element solving can be executed by
 
 
 
----
+
+
 ## 🔐 Security Features
 
 This project includes **.env encryption** with three security levels:
@@ -88,6 +89,7 @@ python encrypt_env.py disable-2fa       # Remove 2FA (keep password)
 
 
 
+
 ## 📁 Repository's Structure
 
 This repository contains:
@@ -101,3 +103,87 @@ This repository contains:
 - **`requirements.txt`** - Python package dependencies
 
 Each example project (`proj0_*`) includes its own MCP server (`server.py`) that exposes specialized tools for LLM integration.
+
+
+
+
+
+
+## 🎩 Customized Theme
+
+The chat-UI is built on top of "Streamlit" web-UI framework. It allows customization of the theme. To customize your theme, you can add a "config.toml" in the `.streamlit` folder at this repository's path. 
+ 
+The `.config.toml` should look like:
+```toml
+[[theme.fontFaces]]
+family="noto-sans-light"
+url="app/static/NotoSans-Light.ttf"
+style="normal"
+
+
+[theme]
+base="light"
+primaryColor="#4b9fff"
+secondaryBackgroundColor="#CDE0E0"
+font="noto-sans-light"
+
+
+[server]
+enableStaticServing = true
+```
+
+Currently, the template at this repository allows modification of the theme colors and the font style. 
+
+
+## 📜 Credentials
+
+### License
+
+This project is licensed under the **Polyform NonCommercial License 1.0.0** - see the [LICENSE](LICENSE) file for details.
+
+**In summary:**
+- ✅ Free for academic research and personal use
+- ✅ Modifications and redistribution allowed (non-commercially)
+- ❌ Commercial use requires separate permission
+
+### Citation
+
+If you use this project in your research, please cite:
+
+```bibtex
+@software{chat4montecarlo2025,
+  author       = {Hugo},
+  title        = {Chat4MonteCarlo: LLM-Integrated Monte Carlo Simulation Framework for engineering science},
+  year         = {2025},
+  publisher    = {GitHub},
+  url          = {https://github.com/Hugo-build/chat4MonteCarlo},
+  note         = {University of Stavanger}
+}
+```
+
+Or in text format:
+> Hugo (2025). Chat4MonteCarlo: LLM-Integrated Monte Carlo Simulation Framework for engineering science. University of Stavanger. https://github.com/Hugo-build/chat4MonteCarlo
+
+### Contributing
+
+Contributions are welcome! Please follow these guidelines:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/your-feature`)
+3. **Commit** your changes with clear messages
+4. **Push** to your branch and open a **Pull Request**
+
+Please ensure your contributions:
+- Follow the existing code style
+- Include appropriate documentation
+- Do not introduce breaking changes without discussion
+
+### Acknowledgments
+
+- Built on [FastMCP](https://github.com/jlowin/fastmcp) for MCP server implementation
+- UI powered by [Streamlit](https://streamlit.io/)
+- [pySMC](https://github.com/Hugo-build/pySMC) for Sequential Monte Carlo methods
+
+### Contact
+
+For questions, collaborations, or commercial licensing inquiries, please contact.

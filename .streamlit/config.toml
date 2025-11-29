@@ -1,6 +1,16 @@
+[[theme.fontFaces]]
+family="noto-sans-light"
+url="app/static/NotoSans-Light.ttf"
+style="normal"
+
+
 [theme]
 base="light"
 primaryColor="#4b9fff"
 secondaryBackgroundColor="#CDE0E0"
-font="sans-serif"
+font="noto-sans-light"
+
+
+[server]
+enableStaticServing = true
 
