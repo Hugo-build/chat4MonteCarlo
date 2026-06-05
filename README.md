@@ -152,7 +152,7 @@ If you use this project in your research, please cite:
 
 ```bibtex
 @software{chat4montecarlo2025,
-  author       = {Hugo},
+  author       = {Yu Ma},
   title        = {Chat4MonteCarlo: LLM-Integrated Monte Carlo Simulation Framework for engineering science},
   year         = {2025},
   publisher    = {GitHub},
@@ -162,7 +162,7 @@ If you use this project in your research, please cite:
 ```
 
 Or in text format:
-> Hugo (2025). Chat4MonteCarlo: LLM-Integrated Monte Carlo Simulation Framework for engineering science. University of Stavanger. https://github.com/Hugo-build/chat4MonteCarlo
+> Yu Ma (2025). Chat4MonteCarlo: LLM-Integrated Monte Carlo Simulation Framework for engineering science. University of Stavanger. https://github.com/Hugo-build/chat4MonteCarlo
 
 ### Contributing
 
